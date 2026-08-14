@@ -41,3 +41,15 @@ jobs:
         run: |
           docker push \
             ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+  notify:
+    needs:
+      - build-publish
+
+    if: ${{ always() }}
+
+    uses: ./.github/workflows/notify-slack.yaml
+
+    with:
+      environment: dev
+      status: ${{ needs.build-publish.result }}
