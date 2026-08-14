@@ -22,6 +22,15 @@ jobs:
       deployment: false
 
     steps:
+      - name: Verify Slack webhook exists
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "::error::SLACK_WEBHOOK_URL is not available"
+            exit 1
+          fi
+
       - name: Send Slack notification
         uses: slackapi/slack-github-action@v4.0.0
         with:
@@ -29,7 +38,7 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             text: |
-              🚀 *Deployment Notification*
+              ðŸš€ *Deployment Notification*
 
               *Environment:* `${{ inputs.environment }}`
               *Status:* `${{ inputs.status }}`
