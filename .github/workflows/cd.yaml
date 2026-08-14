@@ -42,14 +42,11 @@ jobs:
           docker push \
             ghcr.io/${{ github.repository }}:${{ github.sha }}
 
+  jobs:
   notify:
-    needs:
-      - build-publish
-
-    if: ${{ always() }}
-
-    uses: ./.github/workflows/notify-slack.yaml
-
+    uses: ./.github/workflows/slack-notification.yml
     with:
-      environment: dev
-      status: ${{ needs.build-publish.result }}
+      environment: Dev
+      status: success
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

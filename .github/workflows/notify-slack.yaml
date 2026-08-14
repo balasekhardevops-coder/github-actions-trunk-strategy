@@ -13,13 +13,13 @@ on:
         required: true
         type: string
 
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
+
 jobs:
   notify:
     runs-on: ubuntu-latest
-
-    environment:
-      name: ${{ inputs.environment }}
-      deployment: false
 
     steps:
       - name: Verify Slack webhook exists
@@ -38,7 +38,7 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             text: |
-              ðŸš€ *Deployment Notification*
+              🚀 *Deployment Notification*
 
               *Environment:* `${{ inputs.environment }}`
               *Status:* `${{ inputs.status }}`
