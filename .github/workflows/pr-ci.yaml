@@ -127,10 +127,8 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: "1"
           format: table
-  # =========================================================
+ 
   # 7. BUILD CONTAINER + VULNERABILITY SCAN
-  # =========================================================
-
   container-security:
     name: Docker Build & Image Scan
     runs-on: ubuntu-latest
