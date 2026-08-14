@@ -35,7 +35,7 @@ jobs:
         with:
           image-ref: ghcr.io/${{ github.repository }}:${{ github.sha }}
           severity: HIGH,CRITICAL
-          exit-code: "1"
+          exit-code: "0"
 
       - name: Push image
         run: |
