@@ -1,0 +1,41 @@
+name: Slack Notification
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Environment name
+        required: true
+        type: string
+
+      status:
+        description: Deployment status
+        required: true
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ inputs.environment }}
+      deployment: false
+
+    steps:
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: |
+              🚀 *Deployment Notification*
+
+              *Environment:* `${{ inputs.environment }}`
+              *Status:* `${{ inputs.status }}`
+              *Repository:* `${{ github.repository }}`
+              *Branch:* `${{ github.ref_name }}`
+              *Commit:* `${{ github.sha }}`
+              *Triggered by:* `${{ github.actor }}`
+
+              <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View GitHub Actions Run>
