@@ -11,6 +11,11 @@
     "start": "node src/server.js",
     "lint": "node --check src/app.js && node --check src/server.js"
   },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/balasekhardevops-coder/github-actions-trunk-strategy.git"
