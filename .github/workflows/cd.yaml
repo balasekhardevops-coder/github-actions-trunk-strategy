@@ -42,9 +42,8 @@ jobs:
           docker push \
             ghcr.io/${{ github.repository }}:${{ github.sha }}
 
-  jobs:
   notify:
-    uses: ./.github/workflows/slack-notification.yml
+    uses: ./.github/workflows/notify-slack.yaml
     with:
       environment: Dev
       status: success
