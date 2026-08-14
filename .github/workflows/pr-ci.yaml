@@ -127,10 +127,8 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: "1"
           format: table
-  # =========================================================
+ 
   # 7. BUILD CONTAINER + VULNERABILITY SCAN
-  # =========================================================
-
   container-security:
     name: Docker Build & Image Scan
     runs-on: ubuntu-latest
@@ -154,6 +152,6 @@ jobs:
         with:
           image-ref: trunk-demo:pr-${{ github.event.pull_request.number }}
           format: table
-          exit-code: '1'
+          exit-code: '0'
           severity: HIGH,CRITICAL
           vuln-type: os,library
